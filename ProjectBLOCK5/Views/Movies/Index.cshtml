@@ -1,0 +1,97 @@
+﻿@using ProjectBLOCK5;
+@using ProjectBLOCK5.Models;
+@model List<Movie>
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers 
+<div class="main-content">
+        <div class="row">
+
+
+            <div class="row">
+
+                <div class="col-12">
+                    
+                    <form asp-controller="Movies" asp-action="AddMovie">
+                         @if(ViewBag.movie ==null){
+
+                        <h3>Add a new Movies</h3>
+                        <br />
+                     <p> Title*</p>  <input required type="text" name="title" /> <br /> <br />
+                       <p>Year*</p>   <input required type="number" min="1000" max="9999" name="year" /> <br /> <br />
+                      <p> Image*</p>     <input required type="text" name="image" /> <br />  <br /><p>Description</p>  <br /> 
+                             <textarea required rows="7" cols="30" type="text" name="description" > </textarea> <br /> <br />
+                      <p>   Genre</p>   
+                             <select name="genreid">
+                                 @foreach (Genre genre in ViewBag.Genres)
+                                {
+                                    <option value="@genre.GenreId">@genre.Description</option>
+                                }
+                             </select>
+                              <br /> <br />
+                        <input type="submit" value="Add" />
+                                            }else{
+                                                  <h3>Add a new Movies</h3>
+                        <br />
+                     <p> Title*</p>  <input required type="text" name="title" value="@ViewBag.movie.Title" /> <br /> <br />
+                       <p>Year*</p>   <input required type="text" min="1000" max="9999" name="year" value="@ViewBag.movie.Year" /> <br /> <br />
+                      <p> Image*</p>     <input required type="text" name="image" value="@ViewBag.movie.Image" /> <br />  <br /><p>Description</p>  <br /> 
+                             <textarea required rows="7" cols="30" type="text" name="description" >@ViewBag.movie.Description </textarea> <br /> <br />
+                      <p>   Genre</p>   
+                             <select name="genreid">
+                                 @foreach (Genre genre in ViewBag.Genres)
+                                {
+                                    <option selected="@(ViewBag.movie.GenreId == genre.GenreId ? "selected" : null)" value="@genre.GenreId">@genre.Description</option>
+                                }
+                             </select>
+                              <br /> <br />
+                              <input type="hidden" value="@ViewBag.movie.MovieId" name="MovieId"/>
+                        <input type="submit" value="Add" name="button"/>
+                         <input type="submit" value="Edit" name="button"/>
+                                            }
+                    </form>
+                </div>
+                <br />
+                <br />
+                <div class="col-12">
+                    <!-- ORDERS TABLE -->
+                    <div class="box">
+                        <div class="box-header">
+                            Recent orders
+                        </div>
+                        <div class="box-body overflow-scroll">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#ID</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Year</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Genre</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Movie movie in Model)
+                                    {
+                                        <tr>
+                                            <th scope="row">@movie.MovieId</th>
+                                            <td>@movie.Title</td>
+                                            <td>@movie.Year</td>
+                                            <td>@movie.Image</td>
+                                            <td>@movie.Description</td>
+                                            <td>@movie.Genre.Description</td>
+                                            <td>
+                                                <a asp-controller="Movies" asp-action="Edit" asp-route-id="@movie.MovieId">Edit</a> | <a asp-controller="Movies" asp-action="Delete" asp-route-id="@movie.MovieId">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- END ORDERS TABLE -->
+                </div>
+            </div>
+        </div>

@@ -1,0 +1,103 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using ProjectBLOCK5;
+@using ProjectBLOCK5.Models;
+@model Movie
+
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PHIM HAY</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="d-flex">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Trang Chủ</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="d-flex row">
+                    <form asp-controller="Home" asp-action="Index">
+                        <input type="text" placeholder="Nhập tên phim cần tìm" name="search" />
+                        <input type="submit" value="Tìm" />
+                    </form>
+                    @if (ViewBag.Person.Fullname != null)
+                    {
+
+                        <span>Welcome: @ViewBag.Person.Fullname | </span>
+                        <a asp-controller="Login" asp-action="Logout">Logout</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Login" asp-action="Index">Đăng nhập</a>
+                        
+                    }
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="/lib/images/cloth_1.jpg" alt="Image" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-black">@Model.Title</h2>
+                <p class="mb-4">Thể loại: @Model.Genre.Description</p>
+                <p class="mb-4">Điểm đánh giá: </p>
+                <p class="mb-4">Mô tả: @Model.Description</p>
+
+                @if (ViewBag.Person.Fullname != null)
+                {
+
+                    bool check = false;
+
+                    @foreach (Rate rate in ViewBag.rates)
+                    {
+
+                        @if (rate.PersonId == ViewBag.Person.PersonId)
+                        {
+                            check = true;
+                        }
+
+                    }
+                    @if (check == false)
+                    {
+                        <form asp-controller="Home" asp-action="MovieDetails" method="post">
+                            <h2>Chi tiết đánh giá</h2>
+                            <p>Điểm đánh giá: <input name="num" min="0" max="10" type="number" /></p>
+                            <input type="number" name="MovieId" hidden value="@Model.MovieId" />
+                            <textarea name="comment" rows="5" cols="60"></textarea>
+                            <p><button class="buy-now btn btn-sm btn-primary" type="submit">Đánh giá</button></p>
+                        </form>
+                    }
+                    
+                    @if(ViewBag.OldRate != null){
+                        <form asp-controller="Home" asp-action="EditDetails">
+                            <h2>Chi tiết đánh giá</h2>
+                            <p>Điểm đánh giá: <input name="num" min="0" max="10" value="@ViewBag.OldRate.NumericRating" type="number" /></p>
+                            <input type="number" name="MovieId" hidden value="@Model.MovieId" />
+                            <textarea name="comment" rows="5" cols="60">@ViewBag.OldRate.Comment</textarea>
+                            <p><button class="buy-now btn btn-sm btn-primary" type="submit">Đánh giá</button></p>
+                        </form>
+                    }  
+                }
+                 
+                <h3>Bình luận </h3>
+                @foreach (Rate rate in ViewBag.rates)
+                {
+                    <p class="mb-4">@rate.Person.Fullname: @rate.Comment</p>
+                }
+            </div>
+        </div>
+    </div>
