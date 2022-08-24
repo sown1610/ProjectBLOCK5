@@ -13,7 +13,7 @@ namespace ProjectBLOCK5.Controllers
     {
         CenimaDBContext context = new CenimaDBContext();
 
-        public const string PERSONKEY = "person";
+        public const string person = "person";
         public IActionResult Index()
         {
             ViewBag.Person = GetPerson();
@@ -27,19 +27,17 @@ namespace ProjectBLOCK5.Controllers
             Person person = context.Persons.Where(person => person.Email.Equals(email) && person.Password.Equals(password)).FirstOrDefault();
             if (person == null)
             {
-                string message = "Tài khoản hoặc mật khẩu không đúng ! Vui lòng nhập lại.";
+                string message = "Tài khoản hoặc mật khẩu không đúng";
                 ViewBag.Message = message;
             }
             else
             {
-                //Redirect to Admin Dashboard
                 if (person.Type == 1)
                 {
                     SaveCartSession(person);
                     ViewBag.Person = GetPerson();
                     return RedirectToAction("Index", "Admin");
                 }
-                //Redirect to home.
                 else
                 {
                     SaveCartSession(person);
@@ -53,7 +51,7 @@ namespace ProjectBLOCK5.Controllers
         Person GetPerson()
         {
             var session = HttpContext.Session;
-            string jsonPerson = session.GetString(PERSONKEY);
+            string jsonPerson = session.GetString(person);
             if (jsonPerson != null)
             {
                 return JsonConvert.DeserializeObject<Person>(jsonPerson);
@@ -64,18 +62,17 @@ namespace ProjectBLOCK5.Controllers
         {
             var session = HttpContext.Session;
             string jsonPerson = JsonConvert.SerializeObject(per);
-            session.SetString(PERSONKEY, jsonPerson);
+            session.SetString(person, jsonPerson);
         }
         void DeleteSession()
         {
-            //Delelte Session
             var session = HttpContext.Session;
-            session.Remove(PERSONKEY);
+            session.Remove(person);
         }
         public IActionResult Logout()
         {
             DeleteSession();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Login");
         }
     }
 }

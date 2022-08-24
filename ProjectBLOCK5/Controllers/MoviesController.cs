@@ -28,11 +28,9 @@ namespace ProjectBLOCK5.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            //1. List Category
             List<Genre> genreList = context.Genres.ToList();
             ViewBag.Genres = genreList;
 
-            //2. List Movies
             List<Rate> ratesList = context.Rates.ToList();
             ViewBag.Rates = ratesList;
             List<Movie> moviesList = context.Movies.ToList();
@@ -43,7 +41,6 @@ namespace ProjectBLOCK5.Controllers
         public IActionResult Delete(int id)
         {
             ViewBag.Person = GetPerson();
-            //1. List Category
             List<Genre> genreList = context.Genres.ToList();
             ViewBag.Genres = genreList;
             Movie movie = context.Movies.Where(m => m.MovieId == id).FirstOrDefault();
@@ -52,7 +49,6 @@ namespace ProjectBLOCK5.Controllers
                 context.Movies.Remove(movie);
                 context.SaveChanges();
             }
-            //2. List Movies
             List<Rate> ratesList = context.Rates.ToList();
             ViewBag.Rates = ratesList;
             List<Movie> moviesList = context.Movies.ToList();
@@ -62,7 +58,6 @@ namespace ProjectBLOCK5.Controllers
         {
             List<Movie> moviesList = new List<Movie>();
             
-                // Create a movie and add to database
                 Movie movie = new Movie();
                 movie.Title = title;
                 movie.Year = int.Parse(year);
@@ -73,11 +68,8 @@ namespace ProjectBLOCK5.Controllers
                 context.SaveChanges();
 
                 ViewBag.Person = GetPerson();
-                //1. List Category
                 List<Genre> genreList = context.Genres.ToList();
                 ViewBag.Genres = genreList;
-
-                //2. List Movies
                 List<Rate> ratesList = context.Rates.ToList();
                 ViewBag.Rates = ratesList;
                 moviesList = context.Movies.ToList();
@@ -89,12 +81,10 @@ namespace ProjectBLOCK5.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.Person = GetPerson();
-            //1. List Category
             List<Genre> genreList = context.Genres.ToList();
             ViewBag.Genres = genreList;
             Movie movie = context.Movies.Where(m => m.MovieId == id).FirstOrDefault();
             ViewBag.movie = movie;
-            //2. List Movies
             List<Rate> ratesList = context.Rates.ToList();
             ViewBag.Rates = ratesList;
             List<Movie> moviesList = context.Movies.ToList();
@@ -102,24 +92,28 @@ namespace ProjectBLOCK5.Controllers
         }
 
 
-        public IActionResult Edit1(int id,string title, string year, string image, string description, int genreid)
+        public IActionResult Edit1(string title, string year, string image, string description, int genreid, string button, int MovieId)
         {
-            ViewBag.Person = GetPerson();
-            //1. List Category
-            List<Genre> genreList = context.Genres.ToList();
-            ViewBag.Genres = genreList;
-            Movie movie = context.Movies.Where(m => m.MovieId == id).FirstOrDefault();
-            movie.Title = title;
-            movie.Year = int.Parse(year);
-            movie.Image = image;
-            movie.Description = description;
-            movie.GenreId = genreid;
-            context.SaveChanges();
-            ViewBag.movie = movie;
-            //2. List Movies
-            List<Rate> ratesList = context.Rates.ToList();
-            ViewBag.Rates = ratesList;
-            List<Movie> moviesList = context.Movies.ToList();
+            List<Movie> moviesList = new List<Movie>();
+            if (button.Equals("Edit"))
+            {
+                ViewBag.Person = GetPerson();
+                Movie movieX = context.Movies.Where(m => m.MovieId == MovieId).FirstOrDefault();
+                movieX.Title = title;
+                movieX.Year = int.Parse(year);
+                movieX.Image = image;
+                movieX.Description = description;
+                movieX.GenreId = genreid;
+                context.SaveChanges();
+
+                List<Genre> genreList = context.Genres.ToList();
+                ViewBag.Genres = genreList;
+                List<Rate> ratesList = context.Rates.ToList();
+                ViewBag.Rates = ratesList;
+                moviesList = context.Movies.ToList();
+            }
+            
+
             return View("Index", moviesList);
         }
 

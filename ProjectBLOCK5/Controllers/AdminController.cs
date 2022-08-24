@@ -9,15 +9,15 @@ namespace ProjectBLOCK5.Controllers
 {
     public class AdminController : Controller
     {
-        public const string PERSONKEY = "person";
+        public const string person = "person";
         CenimaDBContext context = new CenimaDBContext();
         Person GetPerson()
         {
             var session = HttpContext.Session;
-            string jsonPerson = session.GetString(PERSONKEY);
-            if (jsonPerson != null)
+            string Person = session.GetString(person);
+            if (Person != null)
             {
-                return JsonConvert.DeserializeObject<Person>(jsonPerson);
+                return JsonConvert.DeserializeObject<Person>(Person);
             }
             return new Person();
         }
@@ -31,19 +31,15 @@ namespace ProjectBLOCK5.Controllers
             }
             List<Person> persons = context.Persons.ToList();
 
-            //Total person
             List<Movie> movies = context.Movies.ToList();
             ViewBag.TotalMovie = movies.Count;
 
-            //Total Comment
             List<Rate> rates = context.Rates.ToList();
             ViewBag.TotalComment = rates.Count;
 
-            //Total Account Active
             List<Person> pers = context.Persons.Where(p => p.IsActive == true).ToList();
             ViewBag.TotalAccountActive = pers.Count;
 
-            //Total Acount Deactive
             List<Person> pers2 = context.Persons.Where(p => p.IsActive == false).ToList();
             ViewBag.TotalAccountDeactive = pers2.Count;
 

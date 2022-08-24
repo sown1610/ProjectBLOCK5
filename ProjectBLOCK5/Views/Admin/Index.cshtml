@@ -26,102 +26,6 @@
 <body>
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
-        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.svg" class="mr-2" alt="logo" /></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
-            </div>
-            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                    <span class="icon-menu"></span>
-                </button>
-                <ul class="navbar-nav mr-lg-2">
-                    <li class="nav-item nav-search d-none d-lg-block">
-                        <div class="input-group">
-                            <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                                <span class="input-group-text" id="search">
-                                    <i class="icon-search"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-                        </div>
-                    </li>
-                </ul>
-                <ul class="navbar-nav navbar-nav-right">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-                            <i class="icon-bell mx-0"></i>
-                            <span class="count"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-success">
-                                        <i class="ti-info-alt mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-normal">Application Error</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        Just now
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-warning">
-                                        <i class="ti-settings mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-normal">Settings</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        Private message
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-info">
-                                        <i class="ti-user mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-normal">New user registration</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        2 days ago
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="nav-item nav-profile dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                            <img src="images/faces/face28.jpg" alt="profile" />
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item">
-                                <i class="ti-settings text-primary"></i>
-                                Settings
-                            </a>
-                            <a class="dropdown-item">
-                                <i class="ti-power-off text-primary"></i>
-                                Logout
-                            </a>
-                        </div>
-                    </li>
-                    <li class="nav-item nav-settings d-none d-lg-flex">
-                        <a class="nav-link" href="#">
-                            <i class="icon-ellipsis"></i>
-                        </a>
-                    </li>
-                </ul>
-                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                    <span class="icon-menu"></span>
-                </button>
-            </div>
-        </nav>
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_settings-panel.html -->
@@ -298,25 +202,12 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" >
                             <i class="icon-grid menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                            <i class="icon-layout menu-icon"></i>
-                            <span class="menu-title">UI Elements</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-                            </ul>
-                        </div>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Movies" asp-action="Index">
                             <i class="icon-grid-2 menu-icon"></i>
@@ -340,7 +231,20 @@
                         </a>
 
                     </li>
-
+                    @*<li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="icon-layout menu-icon"></i>
+                            <span class="menu-title">UI Elements</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="ui-basic">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
                             <i class="icon-columns menu-icon"></i>
@@ -409,18 +313,21 @@
                             <span class="menu-title">Error pages</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="error">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-                            </ul>
-                        </div>
+                        
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="pages/documentation/documentation.html">
                             <i class="icon-paper menu-icon"></i>
                             <span class="menu-title">Documentation</span>
                         </a>
+                    </li>*@
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Login" asp-action="Logout" class="btn btn-outline">
+                            <i class="icon-ban menu-icon"></i>
+                            <span class="menu-title">Logout</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        
                     </li>
                 </ul>
             </nav>
@@ -433,6 +340,7 @@
                                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                                     <h3 class="font-weight-bold">Welcome @ViewBag.Person.Fullname</h3>
                                 </div>
+                                
                                 <div class="col-12 col-xl-4">
                                     <div class="justify-content-end d-flex">
                                     </div>
@@ -485,12 +393,6 @@
                 </div>
                 <!-- content-wrapper ends -->
                 <!-- partial:partials/_footer.html -->
-                <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
-                    </div>
-                </footer>
                 <!-- partial -->
             </div>
             <!-- main-panel ends -->
@@ -520,188 +422,6 @@
     <script src="js/Chart.roundedBarCharts.js"></script>
     <!-- End custom js for this page-->
 </body>
-@*<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Apex Admin
-    </title>
-    <link rel="shortcut icon" href="/images/logo-mb.png" type="image/png">
-    <!-- GOOGLE FONT -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <!-- BOXICONS -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <!-- APP CSS -->
-    <link rel="stylesheet" href="/css/grid.css">
-    <link rel="stylesheet" href="/css/app.css">
-</head>
 
-<body>
-
-      <!-- SIDEBAR -->
-    <div class="sidebar">
-
-        <div class="sidebar-user">
-            <div class="sidebar-user-info">
-                <div class="sidebar-user-name">
-                   Hello, @ViewBag.Person.Fullname
-                </div>
-            </div>
-            <a asp-controller="Login" asp-action="Logout" class="btn btn-outline">
-                  <i class='bx bx-log-out bx-flip-horizontal'></i>
-            </a>
-
-        </div>
-        <!-- SIDEBAR MENU -->
-        <ul class="sidebar-menu">
-            <li>
-                <a asp-controller="Admin" asp-action="Index" class="active">
-                    <i class='bx bx-home'></i>
-                    <span>dashboard</span>
-                </a>
-            </li>
-
-            <li>
-                <a asp-controller="Movies" asp-action="Index">
-                    <i class='bx bx-chart'></i>
-                    <span>Manager Movie</span>
-                </a>
-            </li>
-            <li>
-                <a asp-controller="Genre" asp-action="Index">
-                    <i class='bx bx-chat'></i>
-                    <span>Manager Genre</span>
-                </a>
-            </li>
-            <li>
-                <a asp-controller="Member" asp-action="Index">
-                    <i class='bx bx-calendar'></i>
-                    <span>Manager Account</span>
-                </a>
-            </li>
-            <li class="sidebar-submenu">
-                <a href="#" class="sidebar-menu-dropdown">
-                    <i class='bx bx-cog'></i>
-                    <span>settings</span>
-                    <div class="dropdown-icon"></div>
-                </a>
-                <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                    <li>
-                        <a href="#" class="darkmode-toggle" id="darkmode-toggle">
-                            darkmode
-                            <span class="darkmode-switch"></span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <!-- END SIDEBAR MENU -->
-    </div>
-    <!-- END SIDEBAR -->
-
-    <!-- MAIN CONTENT -->
-
-        <div class="main-header">
-            <div class="mobile-toggle" id="mobile-toggle">
-                <i class='bx bx-menu-alt-right'></i>
-            </div>
-            <div class="main-title">
-                dashboard
-            </div>
-        </div>
-        <div class="main-content">
-            <div class="row">
-                <div class="col-3 col-md-6 col-sm-12">
-                    <div class="box box-hover">
-                        <!-- COUNTER -->
-                        <div class="counter">
-                            <div class="counter-title">
-                                Total Movie
-                            </div>
-                            <div class="counter-info">
-                                <div class="counter-count">
-                                    @ViewBag.TotalMovie
-                                </div>
-                                <i class='bx bx-shopping-bag'></i>
-                            </div>
-                        </div>
-                        <!-- END COUNTER -->
-                    </div>
-                </div>
-                <div class="col-3 col-md-6 col-sm-12">
-                    <div class="box box-hover">
-                        <!-- COUNTER -->
-                        <div class="counter">
-                            <div class="counter-title">
-                                Total Account Active
-                            </div>
-                            <div class="counter-info">
-                                <div class="counter-count">
-                                    @ViewBag.TotalAccountActive
-                                </div>
-                                <i class='bx bx-chat'></i>
-                            </div>
-                        </div>
-                        <!-- END COUNTER -->
-                    </div>
-                </div>
-                <div class="col-3 col-md-6 col-sm-12">
-                    <div class="box box-hover">
-                        <!-- COUNTER -->
-                        <div class="counter">
-                            <div class="counter-title">
-                                total comment
-                            </div>
-                            <div class="counter-info">
-                                <div class="counter-count">
-                                    @ViewBag.TotalComment
-                                </div>
-                                <i class='bx bx-line-chart'></i>
-                            </div>
-                        </div>
-                        <!-- END COUNTER -->
-                    </div>
-                </div>
-                <div class="col-3 col-md-6 col-sm-12">
-                    <div class="box box-hover">
-                        <!-- COUNTER -->
-                        <div class="counter">
-                            <div class="counter-title">
-                                Total Account Deactive
-                            </div>
-                            <div class="counter-info">
-                                <div class="counter-count">
-                                   @ViewBag.TotalAccountDeactive
-                                </div>
-                                <i class='bx bx-user'></i>
-                            </div>
-                        </div>
-                        <!-- END COUNTER -->
-                    </div>
-                </div>
-            </div>
-
-           <br/>
-            <br/>
-             <br/>
-              <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-              <br/>
-              <br/>
-            </div>
-        </div>
-
-    <!-- END MAIN CONTENT -->
-
-    <div class="overlay"></div>
-
-    <!-- SCRIPT -->
-    <!-- APEX CHART -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <!-- APP JS -->
-    <script src="/js/app.js"></script>
-
-</body>*@
 
 </html>
