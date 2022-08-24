@@ -24,77 +24,12 @@
 
 <body>
 
-       <!-- SIDEBAR -->
-    <div class="sidebar">
-
-        <div class="sidebar-user">
-            <div class="sidebar-user-info">               
-                <div class="sidebar-user-name">
-                   Hello, @ViewBag.Person.Fullname
-                </div>
-            </div>
-            <a asp-controller="Login" asp-action="Logout" class="btn btn-outline">
-                  <i class='bx bx-log-out bx-flip-horizontal'></i>
-            </a>
-            
-        </div>
-        <!-- SIDEBAR MENU -->
-        <ul class="sidebar-menu">
-            <li>
-                <a asp-controller="Admin" asp-action="Index" class="active">
-                    <i class='bx bx-home'></i>
-                    <span>dashboard</span>
-                </a>
-            </li>
-           
-            <li>
-                <a asp-controller="Movies" asp-action="Index">
-                    <i class='bx bx-chart'></i>
-                    <span>Manager Movie</span>
-                </a>
-            </li>
-            <li>
-                <a asp-controller="Genre" asp-action="Index">
-                    <i class='bx bx-chat'></i>
-                    <span>Manager Genre</span>
-                </a>
-            </li>
-            <li>
-                <a asp-controller="Member" asp-action="Index">
-                    <i class='bx bx-calendar'></i>
-                    <span>Manager Account</span>
-                </a>
-            </li>
-            <li class="sidebar-submenu">
-                <a href="#" class="sidebar-menu-dropdown">
-                    <i class='bx bx-cog'></i>
-                    <span>settings</span>
-                    <div class="dropdown-icon"></div>
-                </a>
-                <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                    <li>
-                        <a href="#" class="darkmode-toggle" id="darkmode-toggle">
-                            darkmode
-                            <span class="darkmode-switch"></span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <!-- END SIDEBAR MENU -->
-    </div>
+  
     <!-- END SIDEBAR -->
 
     <!-- MAIN CONTENT -->
     
-        <div class="main-header">
-            <div class="mobile-toggle" id="mobile-toggle">
-                <i class='bx bx-menu-alt-right'></i>
-            </div>
-            <div class="main-title">
-                dashboard
-            </div>
-        </div>
+       
         <div class="main-content">
             <div class="row">
                
@@ -105,7 +40,7 @@
                 <form asp-controller="Genre" asp-action="Index" method="post">
                     <h3>Add a new genre</h3>
                     <br/>
-                    <input type="text" name="name"/>
+                    <input required type="text" name="name"/>
                     <input type="submit" value="Add"/>
                 </form>
                 </div>
@@ -114,9 +49,7 @@
                 <div class="col-12">
                     <!-- ORDERS TABLE -->
                     <div class="box">
-                        <div class="box-header">
-                            Recent orders
-                        </div>
+                        
                         <div class="box-body overflow-scroll">
                             <table>
                                 <thead>
@@ -132,7 +65,7 @@
                                         <tr>
                                         <td>@genre.GenreId</td>
                                          <td>@genre.Description</td>
-                                         <td><a style="color: red;" asp-controller="Genre" asp-action="Delete" asp-route-id="@genre.GenreId"> Delete </a></td>
+                                         <td><a style="color: red;" onclick="return ConfirmDelete()" asp-controller="Genre" asp-action="Delete" asp-route-id="@genre.GenreId"> Delete </a></td>
                                     </tr>      
                                     }
                                   
@@ -143,6 +76,9 @@
                     </div>
                     <!-- END ORDERS TABLE -->
                 </div>
+                <div class="text-center" style="margin-bottom: 50px">
+        <a asp-controller="Admin" asp-action="Index" ><button type="button" class="btn btn-primary text-center">Home</button></a>
+    </div>
             </div>
         </div>
  
@@ -157,5 +93,12 @@
     <script src="/js/app.js"></script>
 
 </body>
-
+<script type="text/javascript">
+    function ConfirmDelete() {
+        if (confirm("Do you want delete ?")) {
+            return true;
+        }
+        return false;
+    }
+</script>
 </html>

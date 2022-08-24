@@ -61,28 +61,7 @@ namespace ProjectBLOCK5.Controllers
         public IActionResult AddMovie(string title, string year, string image, string description, int genreid, string button, int MovieId)
         {
             List<Movie> moviesList = new List<Movie>();
-            if (button.Equals("Edit"))
-            {
-                ViewBag.Person = GetPerson();
-                Movie movieX = context.Movies.Where(m => m.MovieId == MovieId).FirstOrDefault();
-                movieX.Title = title;
-                movieX.Year = int.Parse(year);
-                movieX.Image = image;
-                movieX.Description = description;
-                movieX.GenreId = genreid;
-                context.SaveChanges();
-
-                //1. List Category
-                List<Genre> genreList = context.Genres.ToList();
-                ViewBag.Genres = genreList;
-
-                //2. List Movies
-                List<Rate> ratesList = context.Rates.ToList();
-                ViewBag.Rates = ratesList;
-                moviesList = context.Movies.ToList();
-            }
-            else
-            {
+            
                 // Create a movie and add to database
                 Movie movie = new Movie();
                 movie.Title = title;
@@ -102,7 +81,7 @@ namespace ProjectBLOCK5.Controllers
                 List<Rate> ratesList = context.Rates.ToList();
                 ViewBag.Rates = ratesList;
                 moviesList = context.Movies.ToList();
-            }
+            
             
             return View("Index", moviesList);
         }
