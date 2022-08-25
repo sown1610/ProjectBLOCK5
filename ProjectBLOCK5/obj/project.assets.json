@@ -7601,19 +7601,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sown\\.nuget\\packages\\": {}
+    "C:\\Users\\Sown_Laptop\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\FPT\\Learning\\PRN211\\ProjectBLOCK5\\ProjectBLOCK5\\ProjectBLOCK5.csproj",
+      "projectUniqueName": "D:\\FPTU\\Learning\\Ki5\\PRN211\\ProjectBLOCK5\\ProjectBLOCK5\\ProjectBLOCK5.csproj",
       "projectName": "ProjectBLOCK5",
-      "projectPath": "F:\\FPT\\Learning\\PRN211\\ProjectBLOCK5\\ProjectBLOCK5\\ProjectBLOCK5.csproj",
-      "packagesPath": "C:\\Users\\Sown\\.nuget\\packages\\",
-      "outputPath": "F:\\FPT\\Learning\\PRN211\\ProjectBLOCK5\\ProjectBLOCK5\\obj\\",
+      "projectPath": "D:\\FPTU\\Learning\\Ki5\\PRN211\\ProjectBLOCK5\\ProjectBLOCK5\\ProjectBLOCK5.csproj",
+      "packagesPath": "C:\\Users\\Sown_Laptop\\.nuget\\packages\\",
+      "outputPath": "D:\\FPTU\\Learning\\Ki5\\PRN211\\ProjectBLOCK5\\ProjectBLOCK5\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Sown\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Sown_Laptop\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

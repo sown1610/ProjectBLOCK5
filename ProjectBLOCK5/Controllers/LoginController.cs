@@ -29,6 +29,7 @@ namespace ProjectBLOCK5.Controllers
             {
                 string message = "Tài khoản hoặc mật khẩu không đúng";
                 ViewBag.Message = message;
+                
             }
             else
             {
@@ -72,6 +73,27 @@ namespace ProjectBLOCK5.Controllers
         public IActionResult Logout()
         {
             DeleteSession();
+            return RedirectToAction("Index", "Login");
+        }
+        public IActionResult Reg(string fullname, string sex, string email, string pass)
+        {
+            try
+            {
+                Person person = new Person();
+                person.Fullname = fullname;
+                person.Gender = sex;
+                person.Email = email;
+                person.Password = pass;
+                person.Type = 2;
+                person.IsActive = true;
+                context.Persons.Add(person);
+                context.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
             return RedirectToAction("Index", "Login");
         }
     }

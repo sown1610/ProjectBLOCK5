@@ -1,51 +1,54 @@
 ﻿@page
 
+@using ProjectBLOCK5;
+@using ProjectBLOCK5.Models;
 
-@if (ViewBag.Message != null)
-{
-    <p style="color: red;">@ViewBag.Message</p>
-}
 
 
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PHIM HAY </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <div class="d-flex">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="Index">Trang Chủ</a>
-                        </li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom:50px; margin-top:10px">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">PHIM HAY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                    </ul>
-                </div>
-                <div class="d-flex row">
-                    <form asp-controller="Home" asp-action="Index">
-                        <input type="text" placeholder="Nhập tên phim cần tìm" name="search" />
-                        <input type="submit" value="Tìm" />
-                    </form>
-                    @if (ViewBag.Person.Fullname != null)
-                    {
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">TRANG CHỦ <span class="sr-only">(current)</span></a>
+                </li>
+                @if (ViewBag.Person.Type == 1)
+                {
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-controller="Admin" asp-action="Index">Quản lý<span class="sr-only">(current)</span></a>
+                    </li>
+                }
 
-                        <span>Welcome: @ViewBag.Person.Fullname | </span>
-                        <a asp-controller="Login" asp-action="Logout">Logout</a>
-                    }
-                    else
-                    {
-                        <a asp-controller="Login" asp-action="Index">Đăng nhập</a>
 
-                        
-                    }
-                </div>
-            </div>
+
+                <form class="form-inline my-2 my-lg-0" asp-controller="Home" asp-action="Index">
+                    <input style="margin-left: 300px" class="form-control mr-sm-2" type="search" placeholder="Nhập tên phim..." aria-label="Search" name="search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">TÌM</button>
+                </form>
+
+                @if (ViewBag.Person.Fullname != null)
+                {
+
+                    <span style="margin-left: 10px; margin-top:5px">Welcome: @ViewBag.Person.Fullname | </span>
+                    <a style="margin-left: 10px; margin-top:5px" asp-controller="Login" asp-action="Logout">Logout</a>
+                }
+                else
+                {
+                    <a style="margin-left: 10px; margin-top:5px" asp-controller="Login" asp-action="Index">Đăng nhập</a>
+
+                }
+
         </div>
     </nav>
 </header>
+
+
+
 @if (ViewBag.Person.Fullname == null)
 {
 
@@ -54,11 +57,56 @@
             <label>Email: </label>
             <input required name="email" type="text" class="form-control" style="width:20%" />
             <label>Mật khẩu:</label>
-            <input required name="password" type="password" class="form-control"  style="width:20%" />
+            <input required name="password" type="password" class="form-control" style="width:20%" />
         </div>
         
         <button type="submit" class="btn btn-primary">Đăng nhập</button>
     </form>
+    <form asp-controller="Login" asp-action="Reg" >
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Đăng ký </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Họ và tên:</label>
+                            <input required type="text" class="form-control" name="fullname">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Giới tính:</label>
+                            <select class="custom-select" name="sex">
+                                <option selected value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Email:</label>
+                            <input required type="email" class="form-control" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Mật khẩu:</label>
+                            <input required type="password" class="form-control" name="pass">
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+    
 }
 else
 {

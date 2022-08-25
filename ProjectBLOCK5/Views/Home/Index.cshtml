@@ -3,55 +3,67 @@
 @model List<Movie>
 
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PHIM HAY</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <div class="d-flex">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Trang Chủ</a>
-                        </li>
 
-                    </ul>
-                </div>
-                <div class="d-flex row">
-                    <form asp-controller="Home" asp-action="Index">
-                        <input type="text" placeholder="Nhập tên phim cần tìm" name="search" />
-                        <input type="submit" value="Tìm" />
-                    </form>
-                    @if (ViewBag.Person.Fullname != null)
-                    {
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom:50px; margin-top:10px">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">PHIM HAY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                        <span>Welcome: @ViewBag.Person.Fullname | </span>
-                        <a asp-controller="Login" asp-action="Logout">Logout</a>
-                    }
-                    else
-                    {
-                        <a asp-controller="Login" asp-action="Index">Đăng nhập</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">TRANG CHỦ <span class="sr-only">(current)</span></a>
+                </li>
+                @if (ViewBag.Person.Type == 1)
+                {
+                    <li class="nav-item active">
+                    <a class="nav-link" asp-controller="Admin" asp-action="Index">Quản lý<span class="sr-only">(current)</span></a>
+                </li>
+                }
+                
 
-                    }
-                </div>
-            </div>
+
+                <form class="form-inline my-2 my-lg-0" asp-controller="Home" asp-action="Index">
+                    <input style="margin-left: 300px" class="form-control mr-sm-2" type="search" placeholder="Nhập tên phim..." aria-label="Search" name="search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">TÌM</button>
+                </form>
+
+                @if (ViewBag.Person.Fullname != null)
+                {
+
+                    <span style="margin-left: 10px; margin-top:5px">Welcome: @ViewBag.Person.Fullname  </span>
+                    <a style="margin-left: 10px; margin-top:5px" asp-controller="Login" asp-action="Logout">Logout</a>
+                }
+                else
+                {
+                    <a style="margin-left: 10px; margin-top:5px" asp-controller="Login" asp-action="Index">Đăng nhập</a>
+
+                }
+
         </div>
     </nav>
 </header>
 
 <div class="row">
-    <div class="col-md-4">
-        <h3>Thể loại</h3>
-        <ul>
+    
+    <div class="list-group col-md-3">
+        <button type="button" class="btn btn-primary" style="width: 84%;margin-left: auto;">
+            Thể loại <span class="badge badge-light">@ViewBag.Genres.Count</span>
+        </button>
+        <ul style="list-style:none">
             @foreach (Genre genres in ViewBag.Genres)
             {
-                <li><a asp-controller="Home" asp-action="Index" asp-route-id="@genres.GenreId">@genres.Description</a></li>
+                <li>
+                    <a asp-controller="Home" asp-action="Index" asp-route-id="@genres.GenreId" class="list-group-item list-group-item-action">@genres.Description </a>
+                    
+                </li>
+
             }
         </ul>
     </div>
-    <div class="col-md-8">
+    
+    <div class="col-md-9">
         <div class="row">
             @foreach (Movie movie in Model)
             {
@@ -78,8 +90,15 @@
                                         i++;
                                     }
                                 }
+
                                 
-                            @((total/i).ToString("n0")) <!--Lam tron-->
+                                @if(total==0){
+                                    <span style="color:red">Chưa có</span>
+                                }
+                                else
+                                {
+                                    @((total/i).ToString("n0")) 
+                                }
                             </p>
                             <br />
                             <a asp-controller="Home" asp-action="MovieDetails" asp-route-id="@movie.MovieId"> <button type="button" class="btn btn-primary">Đánh giá</button></a>

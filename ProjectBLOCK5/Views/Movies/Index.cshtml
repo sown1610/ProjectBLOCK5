@@ -300,15 +300,11 @@
                     <div class="col-sm-3">
                         <a style="color: white"  <h2>Movies <b></b>Manager</h2></a>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="input-group">
-                            <div class="input-group-btn">
-                                
-                                
-                            </div><!-- /btn-group -->
-                        </div><!-- /input-group -->
-                    </div><!-- /.col-lg-6 -->
-
+                    
+                    <form class="form-inline my-2 my-lg-0" asp-controller="Movies" asp-action="Index">
+                        <input style="margin-left: 300px" class="form-control mr-sm-2" type="search" placeholder="Nhập tên phim..." aria-label="Search" name="search">
+                        <button style="background-color: dimgray;" class="btn btn-outline-success my-2 my-sm-0" type="submit">TÌM</button>
+                    </form>
                     <div class="col-sm-2">
                         <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add new</span></a>
                     </div>
@@ -340,7 +336,7 @@
                             <td> @movie.Title</td>
                             <td>
                                 <img class="thumb" width="300" height="400" src="@movie.Image">
-                                
+
                             </td>
                             <td>
                                 @movie.Year
@@ -348,7 +344,7 @@
                             <td>@movie.Description</td>
                             <td>@movie.Genre.Description</td>
                             <td>
-                                <a asp-controller="Movies" asp-action="Edit" asp-route-id="@movie.MovieId"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> 
+                                <a asp-controller="Movies" asp-action="Edit" asp-route-id="@movie.MovieId"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                 <a onclick="return ConfirmDelete()" asp-controller="Movies" asp-action="Delete" asp-route-id="@movie.MovieId"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
@@ -363,7 +359,7 @@
 
     </div>
     <div class="text-center" style="margin-bottom: 50px">
-        <a asp-controller="Admin" asp-action="Index" ><button type="button" class="btn btn-primary text-center">Home</button></a>
+        <a asp-controller="Admin" asp-action="Index"><button type="button" class="btn btn-primary text-center">Home</button></a>
     </div>
     <!-- Edit Modal HTML -->
     <div id="addEmployeeModal" class="modal fade">
@@ -388,10 +384,10 @@
                             <label>Image</label>
                             <input required type="text" name="image" />
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Description</label>
-                             <textarea required rows="7" cols="30" type="text" name="description"> </textarea>
+                            <textarea required rows="7" cols="30" type="text" name="description"> </textarea>
                         </div>
                         <div class="form-group">
                             <label>Genre</label>
@@ -413,33 +409,33 @@
         </div>
     </div>
 
-                <div class="col-12">
+    <div class="col-12">
 
-                <form asp-controller="Movies" asp-action="Edit1">
-                    @if (ViewBag.movie != null)
-                    
+        <form asp-controller="Movies" asp-action="Edit1">
+            @if (ViewBag.movie != null)
+
+            {
+                <h3>Edit Movies</h3>
+                <br />
+                <p> Title*</p>  <input required type="text" name="title" value="@ViewBag.movie.Title" /> <br /> <br />
+                <p>Year*</p>   <input required type="text" min="1000" max="9999" name="year" value="@ViewBag.movie.Year" /> <br /> <br />
+                <p> Image*</p>     <input required type="text" name="image" value="@ViewBag.movie.Image" /> <br />  <br />
+
+                <p>Description</p>  <br />
+                <textarea required rows="7" cols="30" type="text" name="description">@ViewBag.movie.Description </textarea> <br /> <br />
+                <p>   Genre</p>
+                <select name="genreid">
+                    @foreach (Genre genre in ViewBag.Genres)
                     {
-                        <h3>Edit Movies</h3>
-                        <br />
-                        <p> Title*</p>  <input required type="text" name="title" value="@ViewBag.movie.Title" /> <br /> <br />
-                        <p>Year*</p>   <input required type="text" min="1000" max="9999" name="year" value="@ViewBag.movie.Year" /> <br /> <br />
-                        <p> Image*</p>     <input required type="text" name="image" value="@ViewBag.movie.Image" /> <br />  <br />
-
-                        <p>Description</p>  <br />
-                        <textarea required rows="7" cols="30" type="text" name="description">@ViewBag.movie.Description </textarea> <br /> <br />
-                        <p>   Genre</p>
-                        <select name="genreid">
-                            @foreach (Genre genre in ViewBag.Genres)
-                            {
-                                <option selected="@(ViewBag.movie.GenreId == genre.GenreId ? "selected" : null)" value="@genre.GenreId">@genre.Description</option>
-                            }
-                        </select>
-                        <br /> <br />
-                        <input type="hidden" value="@ViewBag.movie.MovieId" name="MovieId" />
-                        <input type="submit" value="Edit" name="button" />
+                        <option selected="@(ViewBag.movie.GenreId == genre.GenreId ? "selected" : null)" value="@genre.GenreId">@genre.Description</option>
                     }
-                </form>
-            </div>
+                </select>
+                <br /> <br />
+                <input type="hidden" value="@ViewBag.movie.MovieId" name="MovieId" />
+                <input type="submit" value="Edit" name="button" />
+            }
+        </form>
+    </div>
 
 </body>
 <script type="text/javascript">

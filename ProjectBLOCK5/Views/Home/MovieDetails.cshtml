@@ -7,40 +7,43 @@
 
 
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PHIM HAY</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <div class="d-flex">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Trang Chủ</a>
-                        </li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom:50px; margin-top:10px">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">PHIM HAY</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                    </ul>
-                </div>
-                <div class="d-flex row">
-                    <form asp-controller="Home" asp-action="Index">
-                        <input type="text" placeholder="Nhập tên phim cần tìm" name="search" />
-                        <input type="submit" value="Tìm" />
-                    </form>
-                    @if (ViewBag.Person.Fullname != null)
-                    {
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">TRANG CHỦ <span class="sr-only">(current)</span></a>
+                </li>
+                @if (ViewBag.Person.Type == 1)
+                {
+                    <li class="nav-item active">
+                    <a class="nav-link" asp-controller="Admin" asp-action="Index">Quản lý<span class="sr-only">(current)</span></a>
+                </li>
+                }
+                
 
-                        <span>Welcome: @ViewBag.Person.Fullname | </span>
-                        <a asp-controller="Login" asp-action="Logout">Logout</a>
-                    }
-                    else
-                    {
-                        <a asp-controller="Login" asp-action="Index">Đăng nhập</a>
-                        
-                    }
-                </div>
-            </div>
+
+                <form class="form-inline my-2 my-lg-0" asp-controller="Home" asp-action="Index">
+                    <input style="margin-left: 300px" class="form-control mr-sm-2" type="search" placeholder="Nhập tên phim..." aria-label="Search" name="search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">TÌM</button>
+                </form>
+
+                @if (ViewBag.Person.Fullname != null)
+                {
+
+                    <span style="margin-left: 10px; margin-top:5px">Welcome: @ViewBag.Person.Fullname | </span>
+                    <a style="margin-left: 10px; margin-top:5px" asp-controller="Login" asp-action="Logout">Logout</a>
+                }
+                else
+                {
+                    <a style="margin-left: 10px; margin-top:5px" asp-controller="Login" asp-action="Index">Đăng nhập</a>
+
+                }
+
         </div>
     </nav>
 </header>
@@ -49,12 +52,29 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <img src="/lib/images/cloth_1.jpg" alt="Image" class="img-fluid">
+                <img src="@Model.Image" alt="Image" class="img-fluid">
             </div>
             <div class="col-md-6">
                 <h2 class="text-black">@Model.Title</h2>
                 <p class="mb-4">Thể loại: @Model.Genre.Description</p>
-                <p class="mb-4">Điểm đánh giá: </p>
+                <p class="mb-4">
+                    Điểm đánh giá:
+
+                    @{
+                        double total = 0;
+                        int i = 0;
+                    }
+                    @foreach (Rate rate in ViewBag.Rates)
+                    {
+                        @if (rate.MovieId == Model.MovieId)
+                        {
+                            total = total + (double)@rate.NumericRating;
+                            i++;
+                        }
+                    }
+
+                    @((total/i).ToString("n0")) <!--Lam tron-->
+                </p>
                 <p class="mb-4">Mô tả: @Model.Description</p>
 
                 @if (ViewBag.Person.Fullname != null)
@@ -71,6 +91,7 @@
                         }
 
                     }
+                    
                     @if (check == false)
                     {
                         <form asp-controller="Home" asp-action="MovieDetails" method="post">
@@ -82,7 +103,10 @@
                         </form>
                     }
                     
-                    @if(ViewBag.OldRate != null){
+
+
+                    @if (ViewBag.OldRate != null)
+                    {
                         <form asp-controller="Home" asp-action="EditDetails">
                             <h2>Chi tiết đánh giá</h2>
                             <p>Điểm đánh giá: <input name="num" min="0" max="10" value="@ViewBag.OldRate.NumericRating" type="number" /></p>
@@ -90,13 +114,18 @@
                             <textarea name="comment" rows="5" cols="60">@ViewBag.OldRate.Comment</textarea>
                             <p><button class="buy-now btn btn-sm btn-primary" type="submit">Đánh giá</button></p>
                         </form>
-                    }  
+                    }
                 }
-                 
+                else
+                {
+                            <h3 style="color:red">Vui lòng đăng nhập để đánh giá</h3>
+                    
+                }
+
                 <h3>Bình luận </h3>
                 @foreach (Rate rate in ViewBag.rates)
                 {
-                    <p class="mb-4">@rate.Person.Fullname: @rate.Comment</p>
+                    <p class="mb-4">@rate.Person.Fullname: @rate.Comment - @rate.NumericRating</p>
                 }
             </div>
         </div>
