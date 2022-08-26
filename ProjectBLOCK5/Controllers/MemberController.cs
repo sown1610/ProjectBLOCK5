@@ -29,9 +29,7 @@ namespace ProjectBLOCK5.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            //List Genre
             List<Genre> genres = context.Genres.ToList();
-            //List Person
             List<Person> persons = context.Persons.ToList();
             return View(persons);
         }
@@ -42,9 +40,7 @@ namespace ProjectBLOCK5.Controllers
             context.SaveChanges();
 
             ViewBag.Person = GetPerson();
-            //List Genre
             List<Genre> genres = context.Genres.ToList();
-            //List Person
             List<Person> persons = context.Persons.ToList();
 
             return View("Index",persons);

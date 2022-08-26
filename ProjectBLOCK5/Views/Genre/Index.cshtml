@@ -40,7 +40,7 @@
                 <form asp-controller="Genre" asp-action="Index" method="post">
                     <h3>Add a new genre</h3>
                     <br/>
-                    <input required type="text" name="name"/>
+                    <input required type="text" name="name" id="validate" name="validate" pattern="[A-Za-z].{6,}" placeholder="Trên 6 ký tự"/>
                     <input type="submit" value="Add"/>
                 </form>
                 </div>
@@ -55,7 +55,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Customer</th>                                    
+                                        <th>Name</th>       
                                         <th></th>
                                     </tr>
                                 </thead>

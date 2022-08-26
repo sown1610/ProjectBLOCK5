@@ -27,7 +27,7 @@ namespace ProjectBLOCK5.Controllers
             ViewBag.Person = GetPerson();
             List<Genre> genreList = context.Genres.ToList();
             ViewBag.Genres = genreList;
-            
+
             List<Rate> ratesList = context.Rates.ToList();
             ViewBag.Rates = ratesList;
             List<Movie> moviesList = new List<Movie>();

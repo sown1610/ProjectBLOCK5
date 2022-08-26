@@ -372,8 +372,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Title</label>
-                            <input required type="text" name="title" />
+                            <label>Title </label>
+                            <input required type="text" name="title"id="validate" pattern="[A-Za-z].{6,}" placeholder="Trên 6 ký tự"/>
                         </div>
 
                         <div class="form-group">
@@ -382,12 +382,12 @@
                         </div>
                         <div class="form-group">
                             <label>Image</label>
-                            <input required type="text" name="image" />
+                            <input required type="url" name="image" id="url" placeholder="https://example.com"pattern="https://.*"/>
                         </div>
 
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Description</label>
-                            <textarea required rows="7" cols="30" type="text" name="description"> </textarea>
+                            <textarea required rows="7" cols="30" type="text" name="description" > </textarea>
                         </div>
                         <div class="form-group">
                             <label>Genre</label>
@@ -417,9 +417,9 @@
             {
                 <h3>Edit Movies</h3>
                 <br />
-                <p> Title*</p>  <input required type="text" name="title" value="@ViewBag.movie.Title" /> <br /> <br />
+                <p> Title*</p>  <input required type="text" name="title" value="@ViewBag.movie.Title" id="validate" name="validate" pattern="[A-Za-z].{6,}" placeholder="Trên 6 ký tự"/> <br /> <br />
                 <p>Year*</p>   <input required type="text" min="1000" max="9999" name="year" value="@ViewBag.movie.Year" /> <br /> <br />
-                <p> Image*</p>     <input required type="text" name="image" value="@ViewBag.movie.Image" /> <br />  <br />
+                <p> Image*</p>     <input required type="text" name="image" value="@ViewBag.movie.Image"  /> <br />  <br />
 
                 <p>Description</p>  <br />
                 <textarea required rows="7" cols="30" type="text" name="description">@ViewBag.movie.Description </textarea> <br /> <br />

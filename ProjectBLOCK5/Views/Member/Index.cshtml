@@ -62,7 +62,7 @@
                                             <td>@person.Fullname</td>
                                             <td>@person.Gender</td>
                                             <td>@person.Email</td>
-                                            @if (person.IsActive == true)
+                                            @if (person.IsActive == true )
                                             {
                                                 <td>
                                                     <span class="">
@@ -70,14 +70,24 @@
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <a onclick="return ConfirmDelete()" asp-controller="Member" asp-action="SetStatus" asp-route-id="@person.PersonId" asp-route-status="@false">
+                                                    @if(person.IsActive == true && @ViewBag.Person.PersonId == person.PersonId)
+                                                    {
+                                                        <span class="" style="color: red;">
+                                                            IS YOU
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a onclick="return ConfirmDelete()" asp-controller="Member" asp-action="SetStatus" asp-route-id="@person.PersonId" asp-route-status="@false">
                                                         <span class="" style="color: red;">
                                                             Deactive
                                                         </span>
                                                     </a>
+                                                    }
+                                                    
 
                                                 </td>
-                                            }
+                                            } 
                                             @if (person.IsActive == false)
                                             {
                                                 <td>
@@ -93,7 +103,7 @@
                                                     </a>
 
                                                 </td>
-                                            }
+                                            } 
 
 
                                         </tr>
@@ -109,7 +119,7 @@
             </div>
         </div>
 
-       <a asp-controller="Admin" asp-action="Index" ><button type="button" class="btn btn-primary text-center">Home</button></a>
+        <a asp-controller="Admin" asp-action="Index"><button type="button" class="btn btn-primary text-center">Home</button></a>
 
         <!-- END MAIN CONTENT -->
 
